@@ -7,6 +7,26 @@
 </head>
 <body>
     <h2>To Do List</h2>
+    <% if (hasList) { %>
+        <ul>
+            <% for (note of notes) { %>
+                <li>
+                    <%= note.text %>
+                    <form action="/edit" method="POST">
+                        <input type="hidden" name="id" value="<%= note.id %>">
+                        <input type="text" name="note">
+                        <button type="submit">Update</button>
+                    </form>
+                    <form action="/del" method="POST">
+                        <input type="hidden" name="id" value="<%= note.id %>">
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
+            <% } %>
+        </ul>
+    <% } else { %>
+        <p>List is empty, try adding some</p>
+    <% } %>
     <form action="/" method="POST">
         <input name="note"></input>
         <button type="submit">Add to List</button>
